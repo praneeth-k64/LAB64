@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "root": true,
+  "specsDirectory": "specs",
+  "project": {
+    "name": "lab64-website-home",
+    "description": "LAB64 Landing Page - Speckit Root Repository"
+  },
+  "git": {
+    "enabled": true,
+    "branch": "main"
+  }
+}
