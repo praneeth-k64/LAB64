@@ -71,29 +71,30 @@ export function LiquidMetalLogo({
     );
   }
 
-  // Desktop: Use shader effect
+  // Desktop: Use shader effect with Paper Design exported settings
   return (
     <div style={{ width, height }} className={className}>
       <LiquidMetal
-        image="/lab64-logo.png"
-        speed={0.8}
+        image="https://workers.paper.design/file-assets/01K732DQNVNJK9Y9JN1NQKC32X/01K8QC5KP7M5Y2B358D7XA34KV.png"
+        speed={1}
         colorBack="#00000000"
         colorTint="#FFFFFF"
-        softness={0.1}
-        repetition={1.51}
+        softness={0.09}
+        repetition={1}
         shiftRed={0.3}
         shiftBlue={0.3}
-        distortion={0.07}
-        contour={0.4}
-        scale={1.8}
+        distortion={0.81}
+        contour={0.49}
+        scale={1.58}
         rotation={0}
         shape="diamond"
-        angle={70}
+        angle={54}
         style={{
           backgroundColor: 'transparent',
+          borderRadius: '12px',
           height: '100%',
           width: '100%',
-          mixBlendMode: 'luminosity',
+          opacity: 1,
         }}
       />
     </div>

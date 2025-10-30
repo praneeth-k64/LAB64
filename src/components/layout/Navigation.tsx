@@ -3,16 +3,8 @@
 import { motion as m } from 'motion/react';
 import { GlassmorphButton } from '../ui/GlassmorphButton';
 import { LiquidMetalLogo } from '../ui/LiquidMetalLogo';
-import { SectionFade } from '../ui/SectionFade';
 
 export function Navigation() {
-  const scrollToPortfolio = () => {
-    const portfolioSection = document.getElementById('portfolio');
-    if (portfolioSection) {
-      portfolioSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   const handleContact = () => {
     window.location.href = 'mailto:contact@lab64.ai';
   };
@@ -36,17 +28,6 @@ export function Navigation() {
           >
             <LiquidMetalLogo width="200px" height="70px" />
           </m.div>
-
-          {/* Center Navigation Menu */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-            <button
-              onClick={scrollToPortfolio}
-              className="text-white/90 hover:text-white text-lg md:text-xl transition-all duration-200 hover:scale-105 relative group z-50 flex items-center font-ibm-plex-sans font-light"
-            >
-              Portfolio
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full"></span>
-            </button>
-          </div>
 
           {/* Right Side - Contact Button */}
           <m.div

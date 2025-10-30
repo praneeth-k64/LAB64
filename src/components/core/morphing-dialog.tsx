@@ -92,7 +92,10 @@ export function MorphingDialogTrigger({
       layoutId={`dialog-${uniqueId}`}
       onClick={handleClick}
       className={cn('cursor-pointer', className)}
-      style={style}
+      style={{
+        ...style,
+        transformOrigin: 'center center',
+      }}
     >
       {children}
     </motion.div>
@@ -182,7 +185,10 @@ export function MorphingDialogContent({
     <motion.div
       layoutId={`dialog-${uniqueId}`}
       className={cn('overflow-hidden', className)}
-      style={style}
+      style={{
+        ...style,
+        transformOrigin: 'center center',
+      }}
       transition={transition}
     >
       {children}
@@ -204,12 +210,20 @@ export function MorphingDialogImage({
   const { uniqueId } = useMorphingDialog();
 
   return (
-    <motion.img
+    <motion.div
       layoutId={`dialog-img-${uniqueId}`}
-      src={src}
-      alt={alt}
-      className={cn('object-cover', className)}
-    />
+      className={cn('overflow-hidden', className)}
+      style={{
+        transformOrigin: 'center center',
+      }}
+      layout
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover"
+      />
+    </motion.div>
   );
 }
 
