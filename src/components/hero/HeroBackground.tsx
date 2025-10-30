@@ -20,7 +20,7 @@ interface HeroBackgroundProps {
  * - Uses IntersectionObserver to detect visibility
  * - Maintains 2-layer shader stacking for aesthetics
  */
-export function HeroBackground({ shaderType = 'mesh-wireframe' }: HeroBackgroundProps) {
+export function HeroBackground({ shaderType = 'holographic-data-field' }: HeroBackgroundProps) {
   const [isMounted, setIsMounted] = useState(false);
   const [useWebGL, setUseWebGL] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
