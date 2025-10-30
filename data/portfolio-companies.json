@@ -1,0 +1,58 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-10-29T00:00:00Z",
+  "companies": [
+    {
+      "id": "venuai",
+      "name": "VenuAI",
+      "tagline": "AI-driven automation for seamless event and venue management",
+      "description": "Automates venue and event operations with AI, offering seamless guest communication, smart bookings, integrated payments, and real-time analytics to optimize hospitality experiences.",
+      "focusArea": "Event Management AI",
+      "websiteUrl": "https://venuai.cz",
+      "logoUrl": "/companies/venuai-logo.svg",
+      "backgroundImage": "https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2940&auto=format&fit=crop",
+      "comingSoon": false,
+      "displayOrder": 1,
+      "brandColor": "#667eea"
+    },
+    {
+      "id": "ai-creatica",
+      "name": "AI Creatica",
+      "tagline": "Uniting artificial intelligence and robotics to create innovative art experiences",
+      "description": "Invents new frontiers in art and robotics by merging artificial intelligence with creative technologies to deliver interactive, imaginative experiences for modern audiences.",
+      "focusArea": "AI Art Robotics",
+      "websiteUrl": null,
+      "logoUrl": "/companies/ai-creatica-logo.svg",
+      "backgroundImage": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=2940&auto=format&fit=crop",
+      "comingSoon": true,
+      "displayOrder": 2,
+      "brandColor": "#764ba2"
+    },
+    {
+      "id": "dronetics",
+      "name": "Dronetics",
+      "tagline": "Next-generation drone communication and connectivity solutions",
+      "description": "Advancing aerial connectivity with intelligent drone communication networks, providing reliable, innovative solutions for enterprises and industries.",
+      "focusArea": "Drone Communication",
+      "websiteUrl": null,
+      "logoUrl": "/companies/dronetics-logo.svg",
+      "backgroundImage": "https://images.unsplash.com/photo-1473968512647-3e447244af8f?q=80&w=2940&auto=format&fit=crop",
+      "comingSoon": true,
+      "displayOrder": 3,
+      "brandColor": "#f093fb"
+    },
+    {
+      "id": "greyspace-ai",
+      "name": "Greyspace AI",
+      "tagline": "Instantly find and secure commercial greybox spaces with smart AI search",
+      "description": "Empowers corporations to discover, evaluate, and contract greybox commercial spaces in the Czech Republic through a smart AI-driven search and automated workflow.",
+      "focusArea": "Commercial Real Estate AI",
+      "websiteUrl": null,
+      "logoUrl": "/companies/greyspace-ai-logo.svg",
+      "backgroundImage": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2940&auto=format&fit=crop",
+      "comingSoon": true,
+      "displayOrder": 4,
+      "brandColor": "#4facfe"
+    }
+  ]
+}
