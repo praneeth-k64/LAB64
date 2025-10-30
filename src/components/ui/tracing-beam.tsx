@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   motion,
   useTransform,
@@ -15,30 +15,33 @@ export const TracingBeam = ({
   children: React.ReactNode;
   className?: string;
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const contentRef = useRef<HTMLDivElement>(null);
-  const [svgHeight, setSvgHeight] = useState(0);
+  const { scrollYProgress } = useScroll();
+  const [windowHeight, setWindowHeight] = useState(1000);
 
   useEffect(() => {
-    if (contentRef.current) {
-      setSvgHeight(contentRef.current.offsetHeight);
-    }
+    const updateHeight = () => {
+      setWindowHeight(window.innerHeight);
+    };
+
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+
+    return () => {
+      window.removeEventListener('resize', updateHeight);
+    };
   }, []);
 
+  // Animate gradient from top to bottom based on scroll progress
+  // Start with gradient off-screen (negative) and move it down as we scroll
   const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 0.8], [50, svgHeight]),
+    useTransform(scrollYProgress, [0, 0.8, 1], [-200, windowHeight * 0.6, windowHeight]),
     {
       stiffness: 500,
       damping: 90,
     },
   );
   const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [50, svgHeight - 200]),
+    useTransform(scrollYProgress, [0, 1], [0, windowHeight]),
     {
       stiffness: 500,
       damping: 90,
@@ -46,37 +49,32 @@ export const TracingBeam = ({
   );
 
   return (
-    <motion.div
-      ref={ref}
-      className={cn("relative mx-auto h-full w-full", className)}
-    >
-      <div className="fixed top-0 right-4 md:right-8 h-screen z-50 pointer-events-none">
+    <>
+      <div className="fixed top-0 right-4 md:right-8 h-screen z-50 pointer-events-none flex items-start">
         <svg
-          viewBox={`0 0 20 ${svgHeight}`}
+          viewBox={`0 0 20 ${windowHeight}`}
           width="20"
-          height={svgHeight}
+          height={windowHeight}
           className="block"
           aria-hidden="true"
+          preserveAspectRatio="none"
         >
+          {/* Background track */}
           <motion.path
-            d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
+            d={`M 10 0 L 10 ${windowHeight}`}
             fill="none"
             stroke="#9091A0"
             strokeOpacity="0.16"
-            transition={{
-              duration: 10,
-            }}
-          ></motion.path>
+            strokeWidth="1.25"
+          />
+          {/* Animated gradient progress line */}
           <motion.path
-            d={`M 1 0V -36 l 18 24 V ${svgHeight * 0.8} l -18 24V ${svgHeight}`}
+            d={`M 10 0 L 10 ${windowHeight}`}
             fill="none"
             stroke="url(#gradient)"
             strokeWidth="1.25"
             className="motion-reduce:hidden"
-            transition={{
-              duration: 10,
-            }}
-          ></motion.path>
+          />
           <defs>
             <motion.linearGradient
               id="gradient"
@@ -94,7 +92,7 @@ export const TracingBeam = ({
           </defs>
         </svg>
       </div>
-      <div ref={contentRef}>{children}</div>
-    </motion.div>
+      <div className={cn("relative mx-auto h-full w-full", className)}>{children}</div>
+    </>
   );
 };
