@@ -39,11 +39,14 @@ const MeshWireframe = memo(() => (
       distortion={1.2}
       swirl={0.8}
       speed={0.2}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
         width: '100%',
         height: '100%',
+        transform: 'translateZ(0)',
       }}
     />
     <MeshGradient
@@ -51,12 +54,15 @@ const MeshWireframe = memo(() => (
       distortion={0.8}
       swirl={1.2}
       speed={0.3}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
         width: '100%',
         height: '100%',
         opacity: 0.6,
+        transform: 'translateZ(0)',
       }}
     />
   </div>
@@ -71,23 +77,29 @@ const SpiralSmoke = memo(() => (
       strokeWidth={1.2}
       noise={0.4}
       speed={0.18}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
         width: '100%',
         height: '100%',
+        transform: 'translateZ(0)',
       }}
     />
     <SmokeRing
       colors={['#d946ef', '#8b5cf6', '#6366f1', '#1e1b4b']}
       speed={0.25}
       scale={1.8}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
         width: '100%',
         height: '100%',
         opacity: 0.7,
+        transform: 'translateZ(0)',
       }}
     />
   </div>
@@ -107,6 +119,11 @@ const NeonMeshGlow = memo(() => (
       distortion={1.0}
       swirl={0.7}
       speed={0.18}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
+      style={{
+        transform: 'translateZ(0)',
+      }}
     />
     {/* Overlay with screen blend for additive glow */}
     <MeshGradient
@@ -115,9 +132,12 @@ const NeonMeshGlow = memo(() => (
       distortion={0.8}
       swirl={1.0}
       speed={0.25}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         opacity: 0.5,
         mixBlendMode: 'screen',
+        transform: 'translateZ(0)',
       }}
     />
   </div>
@@ -133,11 +153,14 @@ const NeuralFusion = memo(() => (
       brightness={0.2}
       contrast={0.7}
       speed={0.15}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
         width: '100%',
         height: '100%',
+        transform: 'translateZ(0)',
       }}
     />
     {/* Simplex noise with overlay blend for texture integration */}
@@ -145,6 +168,8 @@ const NeuralFusion = memo(() => (
       colors={['#00ffff', '#ffffff', '#22d3ee', '#000000']}
       stepsPerColor={5}
       speed={0.22}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
@@ -152,6 +177,7 @@ const NeuralFusion = memo(() => (
         height: '100%',
         opacity: 0.4,
         mixBlendMode: 'overlay',
+        transform: 'translateZ(0)',
       }}
     />
   </div>
@@ -174,6 +200,8 @@ const HolographicDataField = memo(() => (
       ]}
       scale={1}
       speed={0.85}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
@@ -181,7 +209,8 @@ const HolographicDataField = memo(() => (
         height: '100%',
         opacity: 1,
         mixBlendMode: 'screen',
-        filter: 'blur(8px)',
+        filter: 'blur(5px)',
+        transform: 'translateZ(0)',
       }}
     />
     {/* Dithering overlay */}
@@ -191,8 +220,10 @@ const HolographicDataField = memo(() => (
       shape="simplex"
       type="4x4"
       size={2}
-      speed={1}
+      speed={0.4}
       scale={0.6}
+      maxPixelCount={3110400}
+      minPixelRatio={1.5}
       style={{
         position: 'absolute',
         inset: 0,
@@ -200,6 +231,7 @@ const HolographicDataField = memo(() => (
         height: '100%',
         opacity: 0.1,
         mixBlendMode: 'overlay',
+        transform: 'translateZ(0)',
       }}
     />
   </div>

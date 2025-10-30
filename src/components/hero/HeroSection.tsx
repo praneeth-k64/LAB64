@@ -6,6 +6,7 @@ import { HeroBackground, ShaderType } from './HeroBackground';
 import { ShaderSelector } from '../ui/ShaderSelector';
 import { TextEffect } from '../ui/text-effect';
 import { SectionFade } from '../ui/SectionFade';
+import ScrollIndicator from '../ui/scroll-indicator';
 
 export function HeroSection() {
   const [currentShader, setCurrentShader] = useState<ShaderType>('mesh-wireframe');
@@ -44,6 +45,7 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
+      style={{ transform: 'translateZ(0)' }}
       aria-label="Hero section"
     >
       {/* Shader Selector Dropdown */}
@@ -94,6 +96,9 @@ export function HeroSection() {
           </TextEffect>
         </div>
       </m.div>
+
+      {/* Scroll Indicator */}
+      <ScrollIndicator />
     </section>
   );
 }

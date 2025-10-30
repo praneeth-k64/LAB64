@@ -34,9 +34,25 @@
   }
 }
 
-/* Smooth scrolling */
+/* Smooth scrolling with scroll performance optimizations */
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll; /* Force scrollbar to prevent layout shifts */
+  -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+}
+
+/* GPU acceleration for main containers to improve scroll performance */
+section,
+main {
+  transform: translateZ(0);
+}
+
+/* Optimize repaints - only apply when motion is not reduced */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
 }
 
 /* Respect prefers-reduced-motion */

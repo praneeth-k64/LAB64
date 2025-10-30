@@ -83,7 +83,16 @@ export function HeroBackground({ shaderType = 'mesh-wireframe' }: HeroBackground
   // Render shaders only when in viewport for performance
   // When out of viewport, shaders are completely unmounted (paused)
   return (
-    <div ref={containerRef} className="absolute inset-0 w-full h-full">
+    <div
+      ref={containerRef}
+      className="absolute inset-0 w-full h-full"
+      style={{
+        transform: 'translateZ(0)',
+        willChange: 'transform',
+        contain: 'layout style paint',
+        contentVisibility: 'auto',
+      }}
+    >
       {isInViewport && getLayeredShader(shaderType)}
     </div>
   );
