@@ -210,20 +210,15 @@ export function MorphingDialogImage({
   const { uniqueId } = useMorphingDialog();
 
   return (
-    <motion.div
+    <motion.img
       layoutId={`dialog-img-${uniqueId}`}
-      className={cn('overflow-hidden', className)}
+      src={src}
+      alt={alt}
+      className={cn('object-cover', className)}
       style={{
         transformOrigin: 'center center',
       }}
-      layout
-    >
-      <img
-        src={src}
-        alt={alt}
-        className="w-full h-full object-cover"
-      />
-    </motion.div>
+    />
   );
 }
 

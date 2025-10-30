@@ -232,15 +232,13 @@ export const Card = ({
           className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden bg-black font-sans sm:w-[90vw] sm:max-w-5xl"
         >
           {/* Background Image */}
-          <div className="absolute inset-0 z-0">
-            <MorphingDialogImage
-              src={card.src}
-              alt={card.title}
-              className="w-full h-full object-cover"
-            />
-            {/* Gradient overlay - transparent at top, black at bottom */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black" />
-          </div>
+          <MorphingDialogImage
+            src={card.src}
+            alt={card.title}
+            className="absolute inset-0 w-full h-full z-0 object-cover"
+          />
+          {/* Gradient overlay - transparent at top, black at bottom */}
+          <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/40 via-black/60 to-black" />
 
           {/* Content */}
           <div className="relative z-10 p-8 md:p-12 min-h-[600px] flex flex-col">
