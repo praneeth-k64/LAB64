@@ -9,7 +9,7 @@ import { SectionFade } from '../ui/SectionFade';
 import ScrollIndicator from '../ui/scroll-indicator';
 
 export function HeroSection() {
-  const [currentShader, setCurrentShader] = useState<ShaderType>('mesh-wireframe');
+  const [currentShader, setCurrentShader] = useState<ShaderType>('holographic-data-field');
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
