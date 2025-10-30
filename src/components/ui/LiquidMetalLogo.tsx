@@ -1,11 +1,14 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { LiquidMetal } from '@paper-design/shaders-react';
+import Image from 'next/image';
 
 /**
- * Code exported from Paper
- * https://app.paper.design/file/01K8QCAQ1Y8DY6BZ13HVSRABKR?node=01K4PRV1TBDZBSTJ2F25P9SEQA
- * on Oct 29, 2025 at 8:20 PM.
+ * LAB64 Logo Component with Performance Optimization
+ * - Desktop/Laptop: Uses LiquidMetal shader effect for aesthetics
+ * - Mobile: Uses static image for better performance
+ * - Logo is now hosted locally instead of CDN
  */
 
 interface LiquidMetalLogoProps {
@@ -19,10 +22,60 @@ export function LiquidMetalLogo({
   height = '60px',
   className = ''
 }: LiquidMetalLogoProps) {
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    // Detect mobile devices
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Prevent hydration mismatch
+  if (!isMounted) {
+    return (
+      <div style={{ width, height }} className={className}>
+        <Image
+          src="/lab64-logo.png"
+          alt="LAB64 Logo"
+          width={180}
+          height={60}
+          priority
+          className="w-full h-full object-contain"
+        />
+      </div>
+    );
+  }
+
+  // Mobile: Use static image for performance
+  if (isMobile) {
+    return (
+      <div style={{ width, height }} className={className}>
+        <Image
+          src="/lab64-logo.png"
+          alt="LAB64 Logo"
+          width={180}
+          height={60}
+          priority
+          className="w-full h-full object-contain"
+        />
+      </div>
+    );
+  }
+
+  // Desktop: Use shader effect
   return (
     <div style={{ width, height }} className={className}>
       <LiquidMetal
-        image="https://workers.paper.design/file-assets/01K732DQNVNJK9Y9JN1NQKC32X/01K8QC5KP7M5Y2B358D7XA34KV.png"
+        image="/lab64-logo.png"
         speed={0.8}
         colorBack="#00000000"
         colorTint="#FFFFFF"

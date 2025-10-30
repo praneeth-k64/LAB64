@@ -18,7 +18,12 @@ const nextConfig = {
 
   // Performance and bundle size monitoring
   experimental: {
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: [
+      'lucide-react',
+      'motion',
+      '@paper-design/shaders-react',
+      '@tabler/icons-react',
+    ],
   },
 
   // Headers for caching static assets

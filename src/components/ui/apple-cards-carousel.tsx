@@ -1,20 +1,16 @@
 "use client";
 import React, {
   useEffect,
-  useRef,
   useState,
   createContext,
-  useContext,
 } from "react";
 import {
   IconArrowNarrowLeft,
   IconArrowNarrowRight,
-  IconX,
 } from "@tabler/icons-react";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import { ImageProps } from "next/image";
-import { useOutsideClick } from "@/hooks/use-outside-click";
 import { GlowingEffect } from "@/components/ui/glowing-effect";
 import { TextRoll } from "@/components/ui/text-roll";
 import {
@@ -133,7 +129,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                 }}
                 transition={{
                   duration: 0.5,
-                  delay: 0.2 * index,
+                  delay: 0,
                   ease: "easeOut",
                 }}
                 key={"card" + index}
@@ -167,112 +163,23 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
 export const Card = ({
   card,
-  index,
-  layout = false,
+  index: _index,
+  layout: _layout = false,
 }: {
   card: Card;
   index: number;
   layout?: boolean;
 }) => {
-  const [open, setOpen] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
   const [animationTrigger, setAnimationTrigger] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { onCardClose } = useContext(CarouselContext);
-
-  useEffect(() => {
-    function onKeyDown(event: KeyboardEvent) {
-      if (event.key === "Escape") {
-        handleClose();
-      }
-    }
-
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [open]);
-
-  useOutsideClick(containerRef, () => handleClose());
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    onCardClose(index);
-  };
 
   return (
-    <>
-      <AnimatePresence>
-        {open && (
-          <div className="fixed inset-0 z-50 h-screen overflow-auto">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 h-full w-full bg-black/80 backdrop-blur-lg"
-            />
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              ref={containerRef}
-              layoutId={layout ? `card-${card.title}` : undefined}
-              className="relative z-[60] mx-auto my-10 h-fit max-w-5xl rounded-3xl bg-black overflow-hidden font-sans"
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0 z-0">
-                <img
-                  src={card.src}
-                  alt={card.title}
-                  className="w-full h-full object-cover"
-                />
-                {/* Gradient overlay - transparent at top, black at bottom */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black" />
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 p-8 md:p-12 min-h-[600px] flex flex-col">
-                {/* Close button */}
-                <button
-                  className="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 transition-colors"
-                  onClick={handleClose}
-                >
-                  <IconX className="h-6 w-6 text-white" />
-                </button>
-
-                {/* Top content - Category and Title */}
-                <div className="mb-auto">
-                  <motion.p
-                    layoutId={layout ? `category-${card.category}` : undefined}
-                    className="text-sm font-ibm-plex-sans font-medium text-white/80"
-                  >
-                    {card.category}
-                  </motion.p>
-                  <motion.p
-                    layoutId={layout ? `title-${card.title}` : undefined}
-                    className="mt-2 text-3xl md:text-5xl font-rajdhani font-bold text-white"
-                  >
-                    {card.title}
-                  </motion.p>
-                </div>
-
-                {/* Bottom content - Description */}
-                <div className="mt-auto pt-8">
-                  {card.content}
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+    <MorphingDialog
+      transition={{
+        type: 'spring',
+        bounce: 0.05,
+        duration: 0.25,
+      }}
+    >
       <div className="relative z-10 h-80 w-56 rounded-3xl border border-transparent p-[2px] md:h-[40rem] md:w-96">
         <GlowingEffect
           spread={40}
@@ -281,33 +188,29 @@ export const Card = ({
           proximity={64}
           inactiveZone={0.01}
         />
-        <motion.button
-          layoutId={layout ? `card-${card.title}` : undefined}
-          onClick={handleOpen}
-          onMouseEnter={() => {
-            setIsHovered(true);
-            setAnimationTrigger((prev) => prev + 1);
+        <MorphingDialogTrigger
+          style={{
+            borderRadius: '24px',
           }}
-          onMouseLeave={() => setIsHovered(false)}
-          className="relative flex h-full w-full flex-col items-start justify-end overflow-hidden rounded-3xl bg-gray-100 dark:bg-neutral-900"
+          className="relative flex h-full w-full flex-col items-start justify-end overflow-hidden bg-gray-100 dark:bg-neutral-900"
         >
-          <img
+          <MorphingDialogImage
             src={card.src}
             alt={card.title}
             className="absolute inset-0 w-full h-full z-10 object-cover"
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 z-30 h-full bg-gradient-to-t from-black via-black/60 to-transparent" />
-          <div className="relative z-40 p-6 md:p-8">
-            <motion.p
-              layoutId={layout ? `category-${card.category}` : undefined}
-              className="text-left font-ibm-plex-sans text-xs font-medium text-white/80 md:text-sm"
-            >
+          <div
+            className="relative z-40 p-6 md:p-8"
+            onMouseEnter={() => {
+              setAnimationTrigger((prev) => prev + 1);
+            }}
+            onMouseLeave={() => {}}
+          >
+            <MorphingDialogSubtitle className="text-left font-ibm-plex-sans text-xs font-medium text-white/80 md:text-sm">
               {card.category}
-            </motion.p>
-            <motion.p
-              layoutId={layout ? `title-${card.title}` : undefined}
-              className="mt-2 max-w-xs text-left font-rajdhani text-xl font-bold [text-wrap:balance] text-white md:text-3xl"
-            >
+            </MorphingDialogSubtitle>
+            <MorphingDialogTitle className="mt-2 max-w-xs text-left font-rajdhani text-xl font-bold [text-wrap:balance] text-white md:text-3xl">
               <TextRoll
                 duration={0.2}
                 getEnterDelay={(i) => i * 0.01}
@@ -316,11 +219,60 @@ export const Card = ({
               >
                 {card.title}
               </TextRoll>
-            </motion.p>
+            </MorphingDialogTitle>
           </div>
-        </motion.button>
+        </MorphingDialogTrigger>
       </div>
-    </>
+
+      <MorphingDialogContainer>
+        <MorphingDialogContent
+          style={{
+            borderRadius: '24px',
+          }}
+          className="pointer-events-auto relative flex h-auto w-full flex-col overflow-hidden bg-black font-sans sm:w-[90vw] sm:max-w-5xl"
+        >
+          {/* Background Image */}
+          <div className="absolute inset-0 z-0">
+            <MorphingDialogImage
+              src={card.src}
+              alt={card.title}
+              className="w-full h-full object-cover"
+            />
+            {/* Gradient overlay - transparent at top, black at bottom */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black" />
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 p-8 md:p-12 min-h-[600px] flex flex-col">
+            {/* Close button */}
+            <MorphingDialogClose className="text-white" />
+
+            {/* Top content - Category and Title */}
+            <div className="mb-auto">
+              <MorphingDialogSubtitle className="text-sm font-ibm-plex-sans font-medium text-white/80">
+                {card.category}
+              </MorphingDialogSubtitle>
+              <MorphingDialogTitle className="mt-2 text-3xl md:text-5xl font-rajdhani font-bold text-white">
+                {card.title}
+              </MorphingDialogTitle>
+            </div>
+
+            {/* Bottom content - Description */}
+            <MorphingDialogDescription
+              disableLayoutAnimation
+              variants={{
+                initial: { opacity: 0, scale: 0.8, y: 100 },
+                animate: { opacity: 1, scale: 1, y: 0 },
+                exit: { opacity: 0, scale: 0.8, y: 100 },
+              }}
+              className="mt-auto pt-8"
+            >
+              {card.content}
+            </MorphingDialogDescription>
+          </div>
+        </MorphingDialogContent>
+      </MorphingDialogContainer>
+    </MorphingDialog>
   );
 };
 

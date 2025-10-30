@@ -1,6 +1,6 @@
 'use client';
 
-import { m } from 'framer-motion';
+import { motion as m } from 'motion/react';
 import { GlassmorphButton } from '../ui/GlassmorphButton';
 import { LiquidMetalLogo } from '../ui/LiquidMetalLogo';
 import { SectionFade } from '../ui/SectionFade';

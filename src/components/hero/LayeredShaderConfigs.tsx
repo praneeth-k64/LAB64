@@ -1,5 +1,6 @@
 'use client';
 
+import { memo } from 'react';
 import {
   MeshGradient,
   NeuroNoise,
@@ -28,9 +29,10 @@ interface LayeredShaderConfig {
 
 /**
  * KEPT ORIGINALS (2)
+ * All shader components are memoized to prevent unnecessary re-renders
  */
 
-const MeshWireframe = () => (
+const MeshWireframe = memo(() => (
   <div className="absolute inset-0 w-full h-full bg-black overflow-hidden">
     <MeshGradient
       colors={['#000000', '#5100ff', '#000000', '#ea00ff']}
@@ -58,9 +60,10 @@ const MeshWireframe = () => (
       }}
     />
   </div>
-);
+));
+MeshWireframe.displayName = 'MeshWireframe';
 
-const SpiralSmoke = () => (
+const SpiralSmoke = memo(() => (
   <div className="absolute inset-0 w-full h-full bg-black overflow-hidden">
     <Spiral
       colorFront="#9333ea"
@@ -88,13 +91,14 @@ const SpiralSmoke = () => (
       }}
     />
   </div>
-);
+));
+SpiralSmoke.displayName = 'SpiralSmoke';
 
 /**
  * SELECTED FAVORITES
  */
 
-const NeonMeshGlow = () => (
+const NeonMeshGlow = memo(() => (
   <div className="absolute inset-0 w-full h-full bg-black overflow-hidden">
     {/* Base layer */}
     <MeshGradient
@@ -117,9 +121,10 @@ const NeonMeshGlow = () => (
       }}
     />
   </div>
-);
+));
+NeonMeshGlow.displayName = 'NeonMeshGlow';
 
-const NeuralFusion = () => (
+const NeuralFusion = memo(() => (
   <div className="absolute inset-0 w-full h-full bg-black overflow-hidden">
     {/* Base neural layer */}
     <NeuroNoise
@@ -150,10 +155,10 @@ const NeuralFusion = () => (
       }}
     />
   </div>
-);
+));
+NeuralFusion.displayName = 'NeuralFusion';
 
-
-const HolographicDataField = () => (
+const HolographicDataField = memo(() => (
   <div className="absolute inset-0 w-full h-full bg-black overflow-hidden">
     {/* Tech/innovation color panels with blur */}
     <ColorPanels
@@ -198,7 +203,8 @@ const HolographicDataField = () => (
       }}
     />
   </div>
-);
+));
+HolographicDataField.displayName = 'HolographicDataField';
 
 
 /**

@@ -1,6 +1,6 @@
 'use client';
 
-import { m } from 'framer-motion';
+import { motion as m } from 'motion/react';
 import { PortfolioCompany } from '@/types/portfolio';
 import { Carousel, Card as AceternityCard, Card as CardType } from '@/components/ui/apple-cards-carousel';
 

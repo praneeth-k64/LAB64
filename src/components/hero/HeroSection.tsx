@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { m } from 'framer-motion';
+import { motion as m } from 'motion/react';
 import { HeroBackground, ShaderType } from './HeroBackground';
 import { ShaderSelector } from '../ui/ShaderSelector';
 import { TextEffect } from '../ui/text-effect';
