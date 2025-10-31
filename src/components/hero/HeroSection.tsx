@@ -92,7 +92,7 @@ export function HeroSection() {
             trigger={isVisible}
             className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto drop-shadow-md font-ibm-plex-sans font-light"
           >
-            Accelerating intelligence. Shaping the unreal.
+            Accelerating intelligence. Shapeshifting effortlessly.
           </TextEffect>
         </div>
       </m.div>

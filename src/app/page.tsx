@@ -5,6 +5,7 @@ import { Navigation } from '@/components/layout/Navigation';
 import { OrganizationSchema } from '@/components/seo/OrganizationSchema';
 import { TracingBeam } from '@/components/ui/tracing-beam';
 import { getAllCompanies } from '@/lib/portfolio';
+import { GlobalPresence } from '@/components/global-presence/GlobalPresence';
 
 export default function HomePage() {
   const companies = getAllCompanies();
@@ -17,6 +18,7 @@ export default function HomePage() {
         <main className="min-h-screen bg-black">
           <HeroSection />
           <CompanyGrid companies={companies} />
+          <GlobalPresence />
           <Footer />
         </main>
       </TracingBeam>

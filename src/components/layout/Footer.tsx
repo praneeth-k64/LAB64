@@ -16,7 +16,7 @@ export function Footer() {
           </div>
 
           {/* Right Side - Contact Info */}
-          <div className="flex items-center gap-6 text-gray-400 font-ibm-plex-sans text-sm">
+          <div className="flex flex-col md:flex-row items-center gap-3 md:gap-4 text-gray-400 font-ibm-plex-sans text-sm">
             <a
               href="mailto:contact@lab64.cz"
               className="hover:text-white transition-colors"
@@ -24,7 +24,15 @@ export function Footer() {
               contact@lab64.cz
             </a>
             <span className="hidden md:inline">•</span>
-            <span>Prague, Czech Republic</span>
+            <div className="flex flex-wrap items-center justify-center gap-2 md:gap-3">
+              <span className="whitespace-nowrap">🇨🇿 Prague</span>
+              <span>•</span>
+              <span className="whitespace-nowrap">🇮🇳 Hyderabad</span>
+              <span>•</span>
+              <span className="whitespace-nowrap">🇫🇷 Paris</span>
+              <span>•</span>
+              <span className="whitespace-nowrap">🇩🇪 Berlin</span>
+            </div>
           </div>
         </div>
       </div>

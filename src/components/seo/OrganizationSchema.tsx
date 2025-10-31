@@ -7,6 +7,34 @@ export function OrganizationSchema() {
     logo: 'https://lab64.ai/lab64-logo.svg',
     description:
       'LAB64 is a visionary group company pioneering artificial intelligence, agentic systems, and drone communications technology.',
+    areaServed: [
+      'Czech Republic',
+      'India',
+      'France',
+      'Germany',
+    ],
+    address: [
+      {
+        '@type': 'PostalAddress',
+        addressLocality: 'Prague',
+        addressCountry: 'CZ',
+      },
+      {
+        '@type': 'PostalAddress',
+        addressLocality: 'Hyderabad',
+        addressCountry: 'IN',
+      },
+      {
+        '@type': 'PostalAddress',
+        addressLocality: 'Paris',
+        addressCountry: 'FR',
+      },
+      {
+        '@type': 'PostalAddress',
+        addressLocality: 'Berlin',
+        addressCountry: 'DE',
+      },
+    ],
     sameAs: [
       'https://linkedin.com/company/lab64',
       'https://twitter.com/lab64',
