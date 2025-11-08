@@ -3,7 +3,7 @@
       "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
       "@animate-ui": "https://animate-ui.com/r/{name}.json",
       "@magicui": "https://magicui.design/r/{name}",
-      "@motion-primitives": "https://motion-primitives.com/c/registry.json",
+      "@motion-primitives": "https://motion-primitives.com/c/{name}.json",
       "@cult-ui": "https://cult-ui.com/r/{name}.json"
       
     }

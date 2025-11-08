@@ -3,6 +3,7 @@
 import { motion as m } from 'motion/react';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { DottedGlowBackground } from '../dotted-glow-background';
 
 interface HolographicGlitchLogoProps {
   width?: string;
@@ -36,22 +37,35 @@ export function HolographicGlitchLogo({
       style={{ width, height, position: 'relative' }}
       className={className}
     >
-      {/* Base layer with pulsating holographic glow */}
-      <m.div
-        className="absolute inset-0"
-        animate={{
-          filter: [
-            'drop-shadow(0 0 8px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 12px rgba(255, 0, 255, 0.2))',
-            'drop-shadow(0 0 12px rgba(0, 255, 255, 0.4)) drop-shadow(0 0 16px rgba(255, 0, 255, 0.3))',
-            'drop-shadow(0 0 8px rgba(0, 255, 255, 0.3)) drop-shadow(0 0 12px rgba(255, 0, 255, 0.2))'
-          ]
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: 'easeInOut'
+      {/* Dotted glow background effect - extends beyond logo bounds and fades out */}
+      <div
+        className="absolute overflow-hidden"
+        style={{
+          left: '-50%',
+          right: '-50%',
+          top: '-50%',
+          bottom: '-50%',
+          width: '200%',
+          height: '200%',
+          maskImage: 'radial-gradient(ellipse 60% 60% at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 60% 60% at center, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, transparent 80%)',
         }}
       >
+        <DottedGlowBackground
+          gap={10}
+          radius={1.2}
+          color="rgba(255, 255, 255, 0.3)"
+          glowColor="rgba(0, 255, 255, 0.5)"
+          opacity={0.6}
+          backgroundOpacity={0}
+          speedMin={0.2}
+          speedMax={0.6}
+          speedScale={0.7}
+        />
+      </div>
+
+      {/* Base layer */}
+      <div className="absolute inset-0 z-10">
         <Image
           src="/LAB64-logo.png"
           alt="LAB64 Logo"
@@ -60,7 +74,7 @@ export function HolographicGlitchLogo({
           priority
           className="w-full h-full object-contain"
         />
-      </m.div>
+      </div>
 
       {/* Cyan channel - offset left when glitching */}
       <m.div
