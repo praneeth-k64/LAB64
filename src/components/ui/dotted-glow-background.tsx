@@ -233,22 +233,34 @@ export const DottedGlowBackground = ({
         ctx.fillRect(0, 0, width, height);
       }
 
-      // Helper function to interpolate between colors
-      const lerpColor = (r1: number, g1: number, b1: number, r2: number, g2: number, b2: number, t: number) => {
-        return {
-          r: Math.round(r1 + (r2 - r1) * t),
-          g: Math.round(g1 + (g2 - g1) * t),
-          b: Math.round(b1 + (b2 - b1) * t),
-        };
-      };
-
       // animate dots
       ctx.save();
 
       const time = (now / 1000) * Math.max(speedScale, 0);
 
-      // Slowly morphing gradient offset (completes a cycle every 10 seconds)
-      const gradientMorph = (Math.sin(time * 0.2) + 1) / 2; // 0 to 1 oscillating
+      // Define color focal points that move around like mesh gradient nodes
+      const colorNodes = [
+        {
+          x: width * (0.5 + 0.3 * Math.sin(time * 0.15)),
+          y: height * (0.5 + 0.3 * Math.cos(time * 0.12)),
+          color: { r: 0, g: 255, b: 255 }, // Cyan
+        },
+        {
+          x: width * (0.5 + 0.3 * Math.sin(time * 0.18 + Math.PI * 0.66)),
+          y: height * (0.5 + 0.3 * Math.cos(time * 0.14 + Math.PI * 0.66)),
+          color: { r: 50, g: 150, b: 255 }, // Blue
+        },
+        {
+          x: width * (0.5 + 0.3 * Math.sin(time * 0.13 + Math.PI * 1.33)),
+          y: height * (0.5 + 0.3 * Math.cos(time * 0.16 + Math.PI * 1.33)),
+          color: { r: 255, g: 0, b: 255 }, // Magenta
+        },
+        {
+          x: width * (0.5 + 0.3 * Math.sin(time * 0.11 + Math.PI * 2)),
+          y: height * (0.5 + 0.3 * Math.cos(time * 0.17 + Math.PI * 2)),
+          color: { r: 0, g: 255, b: 150 }, // Green/Teal
+        },
+      ];
 
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i];
@@ -257,41 +269,52 @@ export const DottedGlowBackground = ({
         const lin = mod < 1 ? mod : 2 - mod; // 0..1..0
         const a = 0.25 + 0.55 * lin; // 0.25..0.8 linearly
 
-        // Calculate gradient based on position with animated offset
-        const baseGradientT = (d.x / width + d.y / height) / 2;
-        const gradientT = (baseGradientT + gradientMorph * 0.3) % 1; // Add morphing offset
+        // Calculate radial fade from center
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const distFromCenter = Math.sqrt(Math.pow(d.x - centerX, 2) + Math.pow(d.y - centerY, 2));
+        const maxDist = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
+        const radialFade = Math.max(0, 1 - (distFromCenter / maxDist) * 1.5); // Fade out towards edges
 
-        // Holographic gradient: Cyan -> Blue -> Magenta -> Cyan (loop)
-        let color;
-        if (gradientT < 0.33) {
-          // Cyan to Blue
-          const t = gradientT / 0.33;
-          color = lerpColor(0, 255, 255, 50, 150, 255, t);
-        } else if (gradientT < 0.66) {
-          // Blue to Magenta
-          const t = (gradientT - 0.33) / 0.33;
-          color = lerpColor(50, 150, 255, 255, 0, 255, t);
-        } else {
-          // Magenta to Cyan (loop back)
-          const t = (gradientT - 0.66) / 0.34;
-          color = lerpColor(255, 0, 255, 0, 255, 255, t);
+        // Calculate color based on distance to each color node (mesh gradient style)
+        let totalWeight = 0;
+        let r = 0, g = 0, b = 0;
+
+        for (const node of colorNodes) {
+          const dx = d.x - node.x;
+          const dy = d.y - node.y;
+          const distSq = dx * dx + dy * dy;
+          const weight = 1 / (1 + distSq * 0.001); // Stronger distance weighting for more visible gradient
+
+          totalWeight += weight;
+          r += node.color.r * weight;
+          g += node.color.g * weight;
+          b += node.color.b * weight;
         }
 
-        const dotColor = `rgba(${color.r}, ${color.g}, ${color.b}, 1)`;
-        const glowColor = `rgba(${color.r}, ${color.g}, ${color.b}, 0.8)`;
+        // Normalize by total weight
+        r = Math.round(r / totalWeight);
+        g = Math.round(g / totalWeight);
+        b = Math.round(b / totalWeight);
+
+        const dotColor = `rgba(${r}, ${g}, ${b}, 1)`;
+        const glowColor = `rgba(${r}, ${g}, ${b}, 0.8)`;
+
+        // Apply radial fade to opacity
+        const finalAlpha = a * radialFade;
 
         // draw glow when bright
-        if (a > 0.6) {
-          const glow = (a - 0.6) / 0.4; // 0..1
+        if (finalAlpha > 0.6) {
+          const glow = (finalAlpha - 0.6) / 0.4; // 0..1
           ctx.shadowColor = glowColor;
-          ctx.shadowBlur = 8 * glow;
+          ctx.shadowBlur = 8 * glow * radialFade;
         } else {
           ctx.shadowColor = "transparent";
           ctx.shadowBlur = 0;
         }
 
         ctx.fillStyle = dotColor;
-        ctx.globalAlpha = a * opacity;
+        ctx.globalAlpha = finalAlpha * opacity;
         ctx.beginPath();
         ctx.arc(d.x, d.y, radius, 0, Math.PI * 2);
         ctx.fill();

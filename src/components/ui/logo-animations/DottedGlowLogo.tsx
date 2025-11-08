@@ -26,15 +26,13 @@ export function DottedGlowLogo({
         <div className="absolute -inset-8 rounded-2xl overflow-hidden">
           <DottedGlowBackground
             className="pointer-events-none"
-            opacity={1}
-            gap={8}
-            radius={1.5}
-            color="rgba(96, 165, 250, 0.4)" // Blue dots
-            glowColor="rgba(59, 130, 246, 0.8)" // Blue glow
+            opacity={0.9}
+            gap={2}
+            radius={1}
             backgroundOpacity={0}
             speedMin={0.3}
             speedMax={1.2}
-            speedScale={1}
+            speedScale={1.0}
           />
         </div>
 
