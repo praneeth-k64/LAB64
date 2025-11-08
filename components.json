@@ -1,0 +1,10 @@
+{
+    "registries": {
+      "@aceternity": "https://ui.aceternity.com/registry/{name}.json",
+      "@animate-ui": "https://animate-ui.com/r/{name}.json",
+      "@magicui": "https://magicui.design/r/{name}",
+      "@motion-primitives": "https://motion-primitives.com/c/registry.json",
+      "@cult-ui": "https://cult-ui.com/r/{name}.json"
+      
+    }
+  }
