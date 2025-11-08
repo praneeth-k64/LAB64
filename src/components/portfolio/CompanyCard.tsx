@@ -68,12 +68,6 @@ export function CompanyCard({ company }: CompanyCardProps) {
         />
       </div>
 
-      {/* Coming Soon Badge */}
-      {company.comingSoon && (
-        <div className="absolute top-4 right-4 z-20 bg-accent-500 text-white px-3 py-1 rounded-full text-sm font-medium">
-          Coming Soon
-        </div>
-      )}
 
       {/* Card Content */}
       <div className="relative z-10 flex-1 flex flex-col justify-end p-6 text-white">

@@ -1,4 +1,4 @@
-import { LiquidMetalLogo } from '../ui/LiquidMetalLogo';
+import { HolographicGlitchLogo } from '../ui/logo-animations/HolographicGlitchLogo';
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -9,7 +9,7 @@ export function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           {/* Left Side - Logo and Copyright */}
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <LiquidMetalLogo width="140px" height="50px" />
+            <HolographicGlitchLogo width="140px" height="50px" />
             <p className="text-gray-400 font-ibm-plex-sans text-sm">
               &copy; {currentYear} LAB64. All rights reserved.
             </p>

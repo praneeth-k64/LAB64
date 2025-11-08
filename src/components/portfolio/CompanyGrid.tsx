@@ -23,7 +23,7 @@ export function CompanyGrid({ companies }: CompanyGridProps) {
           <p className="text-base md:text-lg text-white/90 leading-relaxed font-ibm-plex-sans">
             {company.description}
           </p>
-          {company.websiteUrl && !company.comingSoon && (
+          {company.websiteUrl && (
             <a
               href={company.websiteUrl}
               target="_blank"
@@ -32,11 +32,6 @@ export function CompanyGrid({ companies }: CompanyGridProps) {
             >
               Visit Website
             </a>
-          )}
-          {company.comingSoon && (
-            <div className="inline-block mt-4 px-6 py-3 bg-white/10 backdrop-blur-md text-white border border-white/20 rounded-full font-medium font-ibm-plex-sans">
-              Coming Soon
-            </div>
           )}
         </div>
       ),

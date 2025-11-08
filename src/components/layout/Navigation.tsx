@@ -2,7 +2,7 @@
 
 import { motion as m } from 'motion/react';
 import { GlassmorphButton } from '../ui/GlassmorphButton';
-import { LiquidMetalLogo } from '../ui/LiquidMetalLogo';
+import { HolographicGlitchLogo } from '../ui/logo-animations/HolographicGlitchLogo';
 
 export function Navigation() {
   const handleContact = () => {
@@ -27,7 +27,7 @@ export function Navigation() {
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <div className="w-32 h-11 sm:w-40 sm:h-14 md:w-48 md:h-16 lg:w-[200px] lg:h-[70px]">
-              <LiquidMetalLogo width="100%" height="100%" />
+              <HolographicGlitchLogo width="100%" height="100%" />
             </div>
           </m.div>
 
