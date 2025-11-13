@@ -274,7 +274,7 @@ export const DottedGlowBackground = ({
         const centerY = height / 2;
         const distFromCenter = Math.sqrt(Math.pow(d.x - centerX, 2) + Math.pow(d.y - centerY, 2));
         const maxDist = Math.sqrt(Math.pow(width / 2, 2) + Math.pow(height / 2, 2));
-        const radialFade = Math.max(0, 1 - (distFromCenter / maxDist) * 1.5); // Fade out towards edges
+        const radialFade = Math.max(0.15, 1 - (distFromCenter / maxDist) * 0.7); // Gentler fade, minimum 0.15 visibility
 
         // Calculate color based on distance to each color node (mesh gradient style)
         let totalWeight = 0;
@@ -301,13 +301,13 @@ export const DottedGlowBackground = ({
         const glowColor = `rgba(${r}, ${g}, ${b}, 0.8)`;
 
         // Apply radial fade to opacity
-        const finalAlpha = a * radialFade;
+        const finalAlpha = Math.max(0.15, a * radialFade); // Ensure minimum visibility
 
-        // draw glow when bright
-        if (finalAlpha > 0.6) {
-          const glow = (finalAlpha - 0.6) / 0.4; // 0..1
+        // draw glow when bright (lowered threshold for more visible glows)
+        if (finalAlpha > 0.45) {
+          const glow = (finalAlpha - 0.45) / 0.55; // 0..1
           ctx.shadowColor = glowColor;
-          ctx.shadowBlur = 8 * glow * radialFade;
+          ctx.shadowBlur = 10 * glow * radialFade;
         } else {
           ctx.shadowColor = "transparent";
           ctx.shadowBlur = 0;

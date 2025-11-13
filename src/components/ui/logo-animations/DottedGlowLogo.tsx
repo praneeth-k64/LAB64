@@ -23,7 +23,7 @@ export function DottedGlowLogo({
       {/* Container with dotted glow background */}
       <div className="relative w-full h-full">
         {/* Extended background area for glow effect */}
-        <div className="absolute -inset-8 rounded-2xl overflow-hidden">
+        <div className="absolute -inset-8 rounded-2xl overflow-visible">
           <DottedGlowBackground
             className="pointer-events-none"
             opacity={0.9}
